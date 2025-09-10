@@ -1,12 +1,3 @@
-:host {
-  --bg: oklch(98% 0 0);
-  --card: #fff;
-  --text: oklch(22% 0.02 0);
-  --muted: oklch(55% 0.02 0);
-  --primary: oklch(53% 0.28 296.97);
-  --ring: color-mix(in srgb, var(--primary) 35%, transparent);
-}
-
 .login-page {
   min-height: 60dvh;
   display: grid;
@@ -17,42 +8,17 @@
 .login-card {
   width: 100%;
   max-width: 420px;
-  background: var(--card);
-  border: 1px solid oklch(92% 0 0);
-  border-radius: 14px;
-  padding: 1.25rem;
-  box-shadow: 0 10px 30px rgba(0,0,0,.06);
 }
 
 h1 { margin: 0; letter-spacing: -0.02em; color: var(--text); }
 .subtitle { margin: .25rem 0 1rem 0; color: var(--muted); }
 
-label { display: block; margin: .6rem 0 .35rem; color: var(--muted); font-size: .9rem; }
-input[type="text"], input[type="password"] {
-  width: 100%;
-  border: 1px solid oklch(88% 0 0);
-  border-radius: 10px;
-  padding: .75rem .9rem;
-  outline: none;
-  transition: border-color .15s ease, box-shadow .15s ease;
-}
-input:focus { border-color: var(--primary); box-shadow: 0 0 0 .25rem var(--ring); }
-
 .row { display: flex; justify-content: space-between; align-items: center; margin: .6rem 0 1rem; }
 .remember { display: inline-flex; align-items: center; gap: .4rem; color: var(--muted); }
 .muted { color: var(--muted); text-decoration: none; }
 
-.login-btn {
-  width: 100%;
-  background: var(--primary);
-  color: #fff;
-  border: none;
-  padding: .85rem 1rem;
-  border-radius: 10px;
-  cursor: pointer;
-}
-.login-btn:disabled { filter: saturate(.2) brightness(1.1); cursor: not-allowed; }
+.login-btn { width: 100%; }
 
-.error { color: oklch(60% 0.22 25); font-size: .8rem; margin-top: .35rem; }
+.error { font-size: .8rem; margin-top: .35rem; }
 
 

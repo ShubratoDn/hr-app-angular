@@ -31,11 +31,7 @@
 .card {
   width: 100%;
   max-width: 860px;
-  background: var(--card-bg);
-  border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.07);
   padding: 2rem;
-  border: 1px solid oklch(92% 0 0);
 }
 
 .title {
@@ -64,53 +60,16 @@
   grid-column: span 2;
 }
 
-label {
-  font-size: .9rem;
-  color: var(--muted);
-  margin-bottom: .35rem;
-}
+label { font-size: .9rem; }
 
-input {
-  appearance: none;
-  border: 1px solid oklch(88% 0 0);
-  border-radius: 10px;
-  padding: .75rem .9rem;
-  font-size: 1rem;
-  outline: none;
-  transition: border-color .15s ease, box-shadow .15s ease;
-}
-
-input:focus {
-  border-color: var(--primary);
-  box-shadow: 0 0 0 .25rem var(--ring);
-}
-
-.error {
-  margin-top: .4rem;
-  color: oklch(60% 0.22 25);
-  font-size: .8rem;
-}
+.error { margin-top: .4rem; }
 
 .submit {
   margin-top: 1.25rem;
-  background: var(--primary);
-  color: #fff;
-  border: none;
-  padding: .85rem 1.25rem;
-  border-radius: 12px;
   font-size: 1rem;
-  cursor: pointer;
-  transition: transform .05s ease, filter .15s ease;
 }
 
-.submit:disabled {
-  filter: saturate(.2) brightness(1.1);
-  cursor: not-allowed;
-}
-
-.submit:not(:disabled):active {
-  transform: translateY(1px);
-}
+.submit:not(:disabled):active { transform: translateY(1px); }
 
 @media (max-width: 720px) {
   .grid { grid-template-columns: repeat(2, 1fr); }
