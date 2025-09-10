@@ -1,0 +1,120 @@
+:host {
+  --bg: oklch(98% 0 0);
+  --card-bg: #fff;
+  --text: oklch(22% 0.02 0);
+  --muted: oklch(55% 0.02 0);
+  --primary: oklch(53% 0.28 296.97);
+  --primary-600: oklch(53% 0.28 296.97);
+  --ring: color-mix(in srgb, var(--primary) 35%, transparent);
+}
+
+.page {
+  min-height: 100dvh;
+  /* display: grid;
+  place-items: center; */
+  /* padding: 2rem; */
+  /* background: radial-gradient(1200px 600px at 20% -10%, color-mix(in srgb, var(--primary) 12%, transparent), transparent 60%), var(--bg); */
+}
+
+.page-title {
+  width: 100%;
+  max-width: 860px;
+  margin: 0 auto 1rem auto;
+  color: var(--text);
+}
+
+.page-title h1 {
+  margin: 0 0 .2rem 0;
+  letter-spacing: -0.02em;
+}
+
+.card {
+  width: 100%;
+  max-width: 860px;
+  background: var(--card-bg);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+  padding: 2rem;
+  border: 1px solid oklch(92% 0 0);
+}
+
+.title {
+  margin: 0 0 1.25rem 0;
+  color: var(--text);
+  letter-spacing: -0.02em;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 1rem 1.25rem;
+}
+
+.field {
+  grid-column: span 3;
+  display: flex;
+  flex-direction: column;
+}
+
+.field:nth-child(5) {
+  grid-column: span 4;
+}
+
+.field:nth-child(6) {
+  grid-column: span 2;
+}
+
+label {
+  font-size: .9rem;
+  color: var(--muted);
+  margin-bottom: .35rem;
+}
+
+input {
+  appearance: none;
+  border: 1px solid oklch(88% 0 0);
+  border-radius: 10px;
+  padding: .75rem .9rem;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+
+input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 .25rem var(--ring);
+}
+
+.error {
+  margin-top: .4rem;
+  color: oklch(60% 0.22 25);
+  font-size: .8rem;
+}
+
+.submit {
+  margin-top: 1.25rem;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  padding: .85rem 1.25rem;
+  border-radius: 12px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform .05s ease, filter .15s ease;
+}
+
+.submit:disabled {
+  filter: saturate(.2) brightness(1.1);
+  cursor: not-allowed;
+}
+
+.submit:not(:disabled):active {
+  transform: translateY(1px);
+}
+
+@media (max-width: 720px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+  .field, .field:nth-child(5), .field:nth-child(6) { grid-column: span 2; }
+}
+
+

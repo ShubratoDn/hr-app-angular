@@ -1,0 +1,28 @@
+<div class="login-page">
+  <div class="login-card">
+    <h1>Welcome back</h1>
+    <p class="subtitle">Sign in to continue</p>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+      <label for="username">Email or Username</label>
+      <input id="username" type="text" placeholder="you@example.com" formControlName="username" />
+      <div class="error" *ngIf="f['username'].touched && f['username'].invalid">Username or email is required</div>
+
+      <label for="password">Password</label>
+      <input id="password" type="password" placeholder="••••••••" formControlName="password" />
+      <div class="error" *ngIf="f['password'].touched && f['password'].invalid">Password is required (min 6)</div>
+
+      <div class="row">
+        <label class="remember">
+          <input type="checkbox" formControlName="remember" />
+          <span>Remember me</span>
+        </label>
+        <a href="#" class="muted">Forgot password?</a>
+      </div>
+
+      <button class="login-btn" type="submit" [disabled]="form.invalid">Sign in</button>
+    </form>
+  </div>
+</div>
+
+

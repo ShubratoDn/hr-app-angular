@@ -1,0 +1,11 @@
+<div class="manage-page">
+  <h1>Manage Employees</h1>
+  <p class="subtitle">Search for existing employees. Results will be implemented later.</p>
+
+  <form [formGroup]="form" (ngSubmit)="onSearch()" class="search-bar">
+    <input type="text" formControlName="query" placeholder="Search by name, division, title, room..." />
+    <button type="submit">Search</button>
+  </form>
+</div>
+
+

@@ -1,0 +1,53 @@
+<div class="page-title">
+  <h1>Registration</h1>
+  <p>Add a new employee</p>
+</div>
+<div class="page">
+  <div class="card">
+    <h2 class="title">Employee Registration</h2>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+      <div class="grid">
+        <div class="field">
+          <label for="firstName">First Name</label>
+          <input id="firstName" type="text" formControlName="firstName" placeholder="Jane" />
+          <div class="error" *ngIf="f['firstName'].touched && f['firstName'].invalid">First name is required</div>
+        </div>
+
+        <div class="field">
+          <label for="lastName">Last Name</label>
+          <input id="lastName" type="text" formControlName="lastName" placeholder="Doe" />
+          <div class="error" *ngIf="f['lastName'].touched && f['lastName'].invalid">Last name is required</div>
+        </div>
+
+        <div class="field">
+          <label for="division">Division</label>
+          <input id="division" type="text" formControlName="division" placeholder="Engineering" />
+          <div class="error" *ngIf="f['division'].touched && f['division'].invalid">Division is required</div>
+        </div>
+
+        <div class="field">
+          <label for="building">Building</label>
+          <input id="building" type="text" formControlName="building" placeholder="HQ North" />
+          <div class="error" *ngIf="f['building'].touched && f['building'].invalid">Building is required</div>
+        </div>
+
+        <div class="field">
+          <label for="title">Title</label>
+          <input id="title" type="text" formControlName="title" placeholder="Software Engineer" />
+          <div class="error" *ngIf="f['title'].touched && f['title'].invalid">Title is required</div>
+        </div>
+
+        <div class="field">
+          <label for="room">Room</label>
+          <input id="room" type="text" formControlName="room" placeholder="3A-214" />
+          <div class="error" *ngIf="f['room'].touched && f['room'].invalid">Room is required</div>
+        </div>
+      </div>
+
+      <button class="submit" type="submit" [disabled]="form.invalid">Register</button>
+    </form>
+  </div>
+</div>
+
+
