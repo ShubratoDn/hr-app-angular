@@ -4,4 +4,24 @@ h1 { margin: 0; letter-spacing: -0.02em; color: var(--text); }
 .search-bar { display: flex; gap: .5rem; }
 .search-bar input { flex: 1; }
 
+.filters { display: flex; flex-wrap: wrap; gap: .4rem; margin: .5rem 0 1rem; }
+.chip {
+  border: 1px solid oklch(88% 0 0);
+  border-radius: 999px;
+  padding: .35rem .7rem;
+  cursor: pointer;
+  user-select: none;
+}
+.chip.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+
+.grid-results {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: .75rem;
+}
+
+.emp-card { padding: 1rem; border: 1px solid oklch(92% 0 0); border-radius: 12px; background: #fff; }
+.emp-title { margin: 0; color: var(--text); }
+.emp-meta { margin: .35rem 0 0; color: var(--muted); font-size: .925rem; }
+
 

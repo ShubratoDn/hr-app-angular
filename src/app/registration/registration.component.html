@@ -3,6 +3,14 @@
   <p>Add a new employee</p>
 </div>
 <div class="page">
+  <div class="card" style="margin-bottom: 1rem;">
+    <h2 class="title">Import Employees (XML)</h2>
+    <div *ngIf="xmlSuccess" class="notice success">{{ xmlSuccess }}</div>
+    <div *ngIf="xmlError" class="notice error">{{ xmlError }}</div>
+    <input type="file" accept=".xml,text/xml" (change)="onXmlSelected($event)" />
+    <p class="subtitle" *ngIf="xmlUploading">Uploading...</p>
+  </div>
+
   <div class="card">
     <h2 class="title">Employee Registration</h2>
 

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { ApiService, EmployeeDto } from '../core/api.service';
 
 @Component({
   selector: 'app-registration',
@@ -16,8 +17,12 @@ export class RegistrationComponent {
   successMessage: string | null = null;
   errorMessage: string | null = null;
   backendErrors: Record<string, string> | null = null;
+  // XML Upload state
+  xmlUploading = false;
+  xmlSuccess: string | null = null;
+  xmlError: string | null = null;
 
-  constructor(private fb: FormBuilder, private http: HttpClient) {
+  constructor(private fb: FormBuilder, private http: HttpClient, private api: ApiService) {
     this.form = this.fb.group({
       firstName: ['', [Validators.required, Validators.maxLength(50)]],
       lastName: ['', [Validators.required, Validators.maxLength(50)]],
@@ -41,8 +46,8 @@ export class RegistrationComponent {
     this.successMessage = null;
     this.errorMessage = null;
     this.backendErrors = null;
-    const payload = this.form.value;
-    this.http.post('http://localhost:1234/api/employees', payload).subscribe({
+    const payload = this.form.value as EmployeeDto;
+    this.api.createEmployee(payload).subscribe({
       next: () => {
         this.successMessage = 'Employee created successfully.';
         this.form.reset();
@@ -63,6 +68,31 @@ export class RegistrationComponent {
           });
         }
         this.submitting = false;
+      }
+    });
+  }
+
+  onXmlSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const file = input.files && input.files[0];
+    if (!file) return;
+
+    this.xmlUploading = true;
+    this.xmlSuccess = null;
+    this.xmlError = null;
+
+    this.api.importEmployeesXml(file).subscribe({
+      next: (res) => {
+        const count = res?.importedCount ?? (Array.isArray(res?.employees) ? res?.employees?.length : 0);
+        this.xmlSuccess = res?.message || `XML import completed successfully. Imported ${count} employees.`;
+        this.xmlUploading = false;
+        // Clear file input
+        (event.target as HTMLInputElement).value = '';
+      },
+      error: (err) => {
+        const body = err?.error || {};
+        this.xmlError = body.message || 'Failed to import XML file.';
+        this.xmlUploading = false;
       }
     });
   }

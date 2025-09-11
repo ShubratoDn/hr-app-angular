@@ -1,11 +1,31 @@
 <div class="manage-page">
   <h1>Manage Employees</h1>
-  <p class="subtitle">Search for existing employees. Results will be implemented later.</p>
+  <p class="subtitle">Search for existing employees.</p>
 
-  <form [formGroup]="form" (ngSubmit)="onSearch()" class="search-bar">
+  <form [formGroup]="form" (ngSubmit)="onSearch()" class="search-bar" style="margin-bottom: .75rem;">
     <input type="text" formControlName="query" placeholder="Search by name, division, title, room..." />
     <button type="submit" class="btn btn-primary">Search</button>
   </form>
+
+  <div class="filters">
+    <span class="chip" [class.active]="isActive('firstname')" (click)="toggleField('firstname')">First Name</span>
+    <span class="chip" [class.active]="isActive('lastname')" (click)="toggleField('lastname')">Last Name</span>
+    <span class="chip" [class.active]="isActive('title')" (click)="toggleField('title')">Title</span>
+    <span class="chip" [class.active]="isActive('division')" (click)="toggleField('division')">Division</span>
+    <span class="chip" [class.active]="isActive('building')" (click)="toggleField('building')">Building</span>
+    <span class="chip" [class.active]="isActive('room')" (click)="toggleField('room')">Room</span>
+  </div>
+
+  <div *ngIf="error" class="notice error">{{ error }}</div>
+  <div *ngIf="loading" class="subtitle">Loading...</div>
+
+  <div *ngIf="!loading && results.length" class="grid-results">
+    <div class="emp-card" *ngFor="let e of results">
+      <h4 class="emp-title">{{ e.firstName }} {{ e.lastName }}</h4>
+      <div class="emp-meta">{{ e.title }}</div>
+      <div class="emp-meta">{{ e.division }} • {{ e.building }} • {{ e.room }}</div>
+    </div>
+  </div>
 </div>
 
 
