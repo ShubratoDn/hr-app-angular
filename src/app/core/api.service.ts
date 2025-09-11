@@ -30,6 +30,14 @@ export class ApiService {
     return this.http.post<EmployeeDto>(`${this.baseUrl}/employees`, payload);
   }
 
+  updateEmployee(id: number, payload: EmployeeDto): Observable<EmployeeDto> {
+    return this.http.put<EmployeeDto>(`${this.baseUrl}/employees/${id}`, payload);
+  }
+
+  deleteEmployee(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/employees/${id}`);
+  }
+
   searchEmployees(name: string, fields: string[] = []): Observable<EmployeeDto[]> {
     let params = new HttpParams();
     if (name) params = params.set('name', name);

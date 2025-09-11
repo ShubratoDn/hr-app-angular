@@ -8,6 +8,8 @@
   </form>
 
   <div class="filters">
+    <span class="chip" [class.active]="isActive('all')" (click)="toggleField('all')">All</span>
+    <span class="chip" [class.active]="isActive('id')" (click)="toggleField('id')">ID</span>
     <span class="chip" [class.active]="isActive('firstname')" (click)="toggleField('firstname')">First Name</span>
     <span class="chip" [class.active]="isActive('lastname')" (click)="toggleField('lastname')">Last Name</span>
     <span class="chip" [class.active]="isActive('title')" (click)="toggleField('title')">Title</span>
@@ -21,9 +23,30 @@
 
   <div *ngIf="!loading && results.length" class="grid-results">
     <div class="emp-card" *ngFor="let e of results">
-      <h4 class="emp-title">{{ e.firstName }} {{ e.lastName }}</h4>
-      <div class="emp-meta">{{ e.title }}</div>
-      <div class="emp-meta">{{ e.division }} • {{ e.building }} • {{ e.room }}</div>
+      <div class="emp-id emp-meta">ID: EMP_{{ e.id }}</div>
+      <h4 class="emp-title" *ngIf="editingId !== e.id">{{ e.firstName }} {{ e.lastName }}</h4>
+      <div class="emp-meta" *ngIf="editingId !== e.id">{{ e.title }}</div>
+      <div class="emp-meta" *ngIf="editingId !== e.id">{{ e.division }} • {{ e.building }} • {{ e.room }}</div>
+
+      <div *ngIf="editingId === e.id" class="edit-form">
+        <input type="text" class="input" [(ngModel)]="editBuffer.firstName" placeholder="First Name" />
+        <input type="text" class="input" [(ngModel)]="editBuffer.lastName" placeholder="Last Name" />
+        <input type="text" class="input" [(ngModel)]="editBuffer.title" placeholder="Title" />
+        <input type="text" class="input" [(ngModel)]="editBuffer.division" placeholder="Division" />
+        <input type="text" class="input" [(ngModel)]="editBuffer.building" placeholder="Building" />
+        <input type="text" class="input" [(ngModel)]="editBuffer.room" placeholder="Room" />
+      </div>
+
+      <br>
+
+      <div class="actions" *ngIf="editingId !== e.id">
+        <button class="btn btn-primary" (click)="startEdit(e)">Update</button>
+        <button class="btn btn-danger" (click)="deleteEmployee(e)">Delete</button>
+      </div>
+      <div class="actions" *ngIf="editingId === e.id">
+        <button class="btn btn-primary" (click)="saveEdit(e)">Save</button>
+        <button class="btn" (click)="cancelEdit()">Cancel</button>
+      </div>
     </div>
   </div>
 </div>
